@@ -1,0 +1,2 @@
+Avant entrainement : theta0 initial = 0  et theta1 initial  =  0 
+Après 39517 iterations,  theta0 final =  0.999997  et theta1 final =  1.000001 
