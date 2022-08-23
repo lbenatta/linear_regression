@@ -38,7 +38,7 @@ int main(void)
 			i++;
 		str = get_next_line(f);
 	}
-	    /*
+	/*
 	printf("km : %Lf\n", tab->km[0]);
 	printf("km : %Lf\n", tab->km[1]);
 	printf("price : %Lf\n", tab->price[0]);
@@ -48,7 +48,6 @@ int main(void)
 	tab->learning_rate = 0.01;
 	tab->count = i;
 	tab->num_iterations = j;
-
 	do
 	{
 		tab->sum_price_tr = 0;
@@ -59,7 +58,7 @@ int main(void)
 		tab->sum_cost = 0.0;
 		tab->diff_cost = 0.0;
 		tab->diff_price_tr[i] = 0;
-
+		
 		for (int i = 0 ; i < 24 ; i++)
 		{
 			tab->price_tr[i] = (tab->theta1 * (tab->km[i] / 10000)) + tab->theta0; // estimé
@@ -82,29 +81,34 @@ int main(void)
 		}
 		if (i == 24)
 		{
-			tab->diff_cost = (long double)tab->sum_cost - tab->cost;
-			tab->theta0 = tab->theta0 - tab->tempt0;
-			tab->theta1 = tab->theta1 - tab->tempt1;
-			tab->num_iterations++;
-			//printf("iterations: %d  | tempt0 : %Lf    | tempt1 : %Lf  | theta0 : %Lf    | theta1 : %Lf  |  sum_sqr_diff : %LF | " , tab->num_iterations, tab->tempt0, tab->tempt1, tab->theta0, tab->theta1, tab->sum_sqr_diff);
-			//printf("cost :  %Lf | sum_cost : %Lf  | diff_cost :  %Lf | sum_diff_price_tr : %Lf  | sum_prod_price_tr : %Lf\n", tab->cost, tab->sum_cost, tab->diff_cost, tab->sum_diff_price_tr, tab->sum_prod_price_tr);
+		 	tab->diff_cost = (long double)tab->sum_cost - tab->cost;
+		 	tab->theta0 = tab->theta0 - tab->tempt0;
+		 	tab->theta1 = tab->theta1 - tab->tempt1;
+		 	tab->num_iterations++;
+		 	printf("iterations: %d  | tempt0 : %Lf    | tempt1 : %Lf  | theta0 : %Lf    | theta1 : %Lf  |  sum_sqr_diff : %LF | " , tab->num_iterations, tab->tempt0, tab->tempt1, tab->theta0, tab->theta1, tab->sum_sqr_diff);
+		 	printf("cost :  %Lf | sum_cost : %Lf  | diff_cost :  %Lf | sum_diff_price_tr : %Lf  | sum_prod_price_tr : %Lf\n", tab->cost, tab->sum_cost, tab->diff_cost, tab->sum_diff_price_tr, tab->sum_prod_price_tr);
 		}
 	} while ((((-tab->tempt0) > 0.00000001) && ((-tab->tempt1) > 0.00000001)) ||(((- tab->tempt0) > 0.000000001) && ((tab->tempt1) > 0.000000001)));
-
-	//printf("Estimation machine learning (méthode gradient descendant) : \nnombre d'iterations: %d  | theta0 final =  %.2Lf    | theta1 final =  %.5Lf \n" , tab->num_iterations, (tab->theta0 * 10000), tab->theta1);
-
+	//} while (tab->num_iterations <= 20);
+	
 	FILE    *fichier = NULL;
 	fichier = fopen("res.txt", "a+");
 
 	if (fichier != NULL)
 	{
 		printf("Estimation machine learning (méthode gradient descendant) : \nAvant entrainement : theta0 initial = 0  et theta1 initial  =  0 \n");
-		printf("Après %d iterations,  theta0 final =  %Lf   et theta1 final =  %Lf \n" , tab->num_iterations, tab->theta0, tab->theta1);
+		printf("Après %d iterations,  theta0 final =  %Lf   et theta1 final =  %Lf \n" , tab->num_iterations, (tab->theta0 * 10000), tab->theta1);
 		fprintf(fichier,"\n \n Estimation Machine Learning (méthode du gradient descendant) :\n");
 		fprintf(fichier, "Avant entrainement : theta0 initial = 0  et theta1 initial  =  0 \n");
 		fprintf(fichier, "Après %d iterations,  theta0 final =  %.2Lf  et theta1 final =  %.5Lf \n" , tab->num_iterations, (tab->theta0 * 10000), tab->theta1);
 		fclose(fichier);
 	}
+	FILE    *fichier_ = NULL;
+	fichier_ = fopen("theta.csv", "a+");
+	if (fichier_ != NULL)
+	{
+	 	fprintf(fichier_, "%.2LF, %.5Lf\n", (tab->theta0 * 10000), tab->theta1);
+	 	fclose(fichier_);
+	}
 	free (tab);
-	return (0);
 }
