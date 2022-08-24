@@ -6,14 +6,13 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/16 11:21:28 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:22:41 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMON_H
 # define COMMON_H
 
-//# include "libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -22,10 +21,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <complex.h>
-//# include "./mlx/mlx.h"
-//# include "./minilibx-linux/mlx.h"
-//# include <X11/keysym.h>
-//# include <X11/X.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
@@ -34,6 +29,8 @@
 # ifndef MAX_FD
 #  define MAX_FD 256
 # endif
+
+# define ABS(X) (X > 0 ? X : -X)
 
 typedef struct t_tab
 {
@@ -102,4 +99,5 @@ char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *str);
 
 void	test(t_tab *tab);
+
 #endif

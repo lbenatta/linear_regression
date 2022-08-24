@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/16 14:44:50 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:44:19 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int main(void)
 	f = open("data.csv", O_RDONLY);
 	i = 0;
 	tab = (t_tab *)malloc(sizeof(t_tab));
+	if(tab == 0)
+	{
+		printf("Échec de l'allocation\n");
+		return(1);
+	}
 	str = get_next_line(f);
 	free(str);
 	str = get_next_line(f);
@@ -58,7 +63,7 @@ int main(void)
 		tab->sum_cost = 0.0;
 		tab->diff_cost = 0.0;
 		tab->diff_price_tr[i] = 0;
-		
+
 		for (int i = 0 ; i < 24 ; i++)
 		{
 			tab->price_tr[i] = (tab->theta1 * (tab->km[i] / 10000)) + tab->theta0; // estimé
@@ -90,7 +95,7 @@ int main(void)
 		}
 	} while ((((-tab->tempt0) > 0.00000001) && ((-tab->tempt1) > 0.00000001)) ||(((- tab->tempt0) > 0.000000001) && ((tab->tempt1) > 0.000000001)));
 	//} while (tab->num_iterations <= 20);
-	
+
 	FILE    *fichier = NULL;
 	fichier = fopen("res.txt", "a+");
 

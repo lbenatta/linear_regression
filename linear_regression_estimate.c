@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/16 12:39:55 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:33:41 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int	main(void)
 
 	f = open("data.csv", O_RDONLY);
 	i = 0;
+	tab = NULL;
 	tab = (t_tab *)malloc(sizeof(t_tab));
+	memset(tab, 0, sizeof(t_tab));
 	str = get_next_line(f);
 	free(str);
 	str = get_next_line(f);
@@ -51,24 +53,23 @@ int	main(void)
 	i = 0;
 	tab->theta0 = 0;
 	tab->theta1 = 0;
-	tab->sum_price = 0;
-	tab->mean_price = 0;
-	tab->sum_km = 0;
-	tab->mean_km = 0;
-	tab->sum_sqr_price = 0;
-	tab->sum_sqr_km = 0;
-	tab->sum_cov = 0;
-	tab->sum_cov = 0;
-	tab->sum_var_km = 0;
-	tab->sum_var_price = 0;
-	tab->r = 0;
+	// tab->sum_price = 0;
+	// tab->mean_price = 0;
+	// tab->sum_km = 0;
+	// tab->mean_km = 0;
+	// tab->sum_sqr_price = 0;
+	// tab->sum_sqr_km = 0;
+	// tab->sum_cov = 0;
+	// tab->sum_cov = 0;
+	// tab->sum_var_km = 0;
+	// tab->sum_var_price = 0;
+	// tab->r = 0;
 	for (i = 0; i < tab->count; i++)
 	{
 		tab->sum_km = tab->sum_km + tab->km[i];
 		tab->mean_km = tab->sum_km / tab->count;
 		tab->sum_price = tab->sum_price + tab->price[i];
 		tab->mean_price = tab->sum_price / tab->count;
-		tab->mean_km = tab->sum_km / tab->count;
 		tab->sqr_km[i] = (long double)tab->km[i] * (long double)tab->km[i];
 		tab->sqr_price[i] = tab->price[i] * tab->price[i];
 		tab->sum_sqr_km = (long double)tab->sum_sqr_km + (long double)tab->sqr_km[i];
@@ -93,7 +94,7 @@ int	main(void)
 		tab->sum_cov = (long double)tab->sum_cov + (long double)tab->cov[i];
 		tab->r = tab->sum_cov / (sqrtl(tab->sum_var_km * tab->sum_var_price));
 		tab->est_price[i] = (tab->theta1 * tab->km[i]) + tab->theta0;
-		tab->delta_price[i] = cabs(tab->est_price[i] - tab->price[i]);
+		tab->delta_price[i] = ABS(tab->est_price[i] - tab->price[i]);
 		tab->sum_delta_price = tab->sum_delta_price + (long double)tab->delta_price[i];
 		tab->accur = 100 - (100 * (long double)tab->sum_delta_price / (long double)tab->sum_price);
 	}

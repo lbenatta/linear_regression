@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/16 11:37:02 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:41:08 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,10 @@ char	**ft_split(char const *s, char c)
 		while (ft_charset(c, s[i]) == 0 && s[i])
 			i++;
 		while (ft_charset(c, s[i]) == 1 && s[i])
+		{
 			i++;
 			v++;
+		}
 	}
 	split[ft_word(c, ((char *)s))] = 0;
 	return (split);
@@ -238,6 +240,7 @@ char	*ft_strdup(const char *str)
 	while (++i < len)
 		s[i] = str[i];
 	return (s);
+	free(s);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -264,6 +267,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	str[i] = '\0';
 	return (str);
+	free(str);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -287,4 +291,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
 	return (str);
+	free(str);
 }
