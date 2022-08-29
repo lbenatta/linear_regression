@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/24 18:22:41 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:28:02 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct t_tab
 	long double	tempt0;
 	long double	tempt1;
 	long double	learning_rate;
+// -------------   predict -----------------------
+	long double	km_max;
 
 }	t_tab;
 

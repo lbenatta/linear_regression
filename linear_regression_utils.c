@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/24 18:41:08 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:57:11 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ char	**ft_split(char const *s, char c)
 	}
 	split[ft_word(c, ((char *)s))] = 0;
 	return (split);
+	free(split);
 }
 
 //--------------------------GNL.c ------------------------------------
@@ -158,6 +159,7 @@ char	*join_line(int nl_position, char **buffer)
 	res[nl_position] = 0;
 	*buffer = tmp;
 	return (res);
+	free(tmp);
 }
 
 char	*read_line(int fd, char **buffer, char *read_return)
@@ -279,17 +281,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
+
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
 	str = (char *)malloc(sizeof(char) * size);
 	if (!str)
 		return (NULL);
-	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
-	j = -1;
-	while (s2[++j])
-		str[i + j] = s2[j];
-	str[i + j] = '\0';
+	if (str != 0)
+	{
+		i = -1;
+		while (s1[++i])
+			str[i] = s1[i];
+		j = -1;
+		while (s2[++j])
+			str[i + j] = s2[j];
+		str[i + j] = '\0';
+	}
 	return (str);
 	free(str);
 }

@@ -6,11 +6,13 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/24 18:33:41 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:39:22 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
+
+#define NUM_DATA 24
 /*
 void test(t_tab *tab)
 {
@@ -41,14 +43,23 @@ int	main(void)
 	str = get_next_line(f);
 	free(str);
 	str = get_next_line(f);
+	while (str == NULL)
+	{
+		printf("Abs de donnees\n");
+		return(1);
+	}
 	while (str != NULL)
 	{
 		strs = ft_split(str, ',');
 		tab->km[i] = ft_atoi(strs[0]);
 		tab->price[i] = ft_atoi(strs[1]);
 			i++;
+		free(str);
+		free(strs);
 		str = get_next_line(f);
 	}
+	free(str);
+
 	tab->count = i;
 	i = 0;
 	tab->theta0 = 0;
@@ -64,6 +75,8 @@ int	main(void)
 	// tab->sum_var_km = 0;
 	// tab->sum_var_price = 0;
 	// tab->r = 0;
+	// tab->km_max = 0;
+
 	for (i = 0; i < tab->count; i++)
 	{
 		tab->sum_km = tab->sum_km + tab->km[i];
@@ -81,6 +94,7 @@ int	main(void)
 	{
 		tab->theta1 = ((tab->mean_km * tab->sum_price) - (tab->sum_pdt)) / ((tab->mean_km * tab->sum_km) - (tab->sum_sqr_km));
 		tab->theta0 = (tab->mean_price - (tab->theta1 * tab->mean_km));
+		tab->km_max =  - (tab->theta0 / tab->theta1);
 	}
 	for (i = 0; i < tab->count; i++)
 	{
@@ -96,7 +110,8 @@ int	main(void)
 		tab->est_price[i] = (tab->theta1 * tab->km[i]) + tab->theta0;
 		tab->delta_price[i] = ABS(tab->est_price[i] - tab->price[i]);
 		tab->sum_delta_price = tab->sum_delta_price + (long double)tab->delta_price[i];
-		tab->accur = 100 - (100 * (long double)tab->sum_delta_price / (long double)tab->sum_price);
+		tab->accur = 100 - (100 * ABS((((long double)tab->sum_delta_price / (long double)tab->sum_price)) / NUM_DATA)) ;
+
 	}
 	//printf("sum_km : %Lf\n", tab->sum_km);
 	//printf("sum_price : %Lf\n", tab->sum_price);
@@ -114,12 +129,16 @@ int	main(void)
 	//printf("sum_delta_price : %Lf\n", tab->sum_delta_price);
 	printf(" correlation r = %.4Lg\n", tab->r);
 	printf(" accuracy MAE = %.4Lg\n", tab->accur);
+	//printf(" km_max = %.0Lf\n", tab->km_max);
 	int			nombre = 0;
 	long double	resultat = 0;
-	printf(" Le prix ne peut être estimé pour un kilométrage > 396 245.\n Entrez le nombre de km (< 396 245):");
+
+	printf(" Le prix ne peut être estimé pour un kilométrage > %.0Lf.\n", tab->km_max);
+	printf(" Entrez le nombre de km (< %.0Lf):", tab->km_max);
 	scanf("%d", &nombre);
 	{
-		if (nombre >= 396245)
+		if ((nombre >= tab->km_max) || (nombre <= 0) || (isdigit(nombre) != 0))
+		//if (nombre >= 396245)
 			printf("Le prix ne peut être estimé.\n");
 		else
 		{

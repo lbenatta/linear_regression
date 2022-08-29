@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/24 18:44:19 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:27:40 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main(void)
 	f = open("data.csv", O_RDONLY);
 	i = 0;
 	tab = (t_tab *)malloc(sizeof(t_tab));
+	memset(tab, 0, sizeof(t_tab));
 	if(tab == 0)
 	{
 		printf("Échec de l'allocation\n");
@@ -35,14 +36,23 @@ int main(void)
 	str = get_next_line(f);
 	free(str);
 	str = get_next_line(f);
+	while (str == NULL)
+	{
+		printf("Abs de donnees\n");
+		return(1);
+	}
 	while (str != NULL)
 	{
 		strs = ft_split(str, ',');
 		tab->km[i] = ft_atoi(strs[0]);
 		tab->price[i] = ft_atoi(strs[1]);
 			i++;
+		free(str);
+		free(strs);
 		str = get_next_line(f);
 	}
+	free(str);
+	free(strs);
 	/*
 	printf("km : %Lf\n", tab->km[0]);
 	printf("km : %Lf\n", tab->km[1]);
@@ -93,7 +103,8 @@ int main(void)
 		 	printf("iterations: %d  | tempt0 : %Lf    | tempt1 : %Lf  | theta0 : %Lf    | theta1 : %Lf  |  sum_sqr_diff : %LF | " , tab->num_iterations, tab->tempt0, tab->tempt1, tab->theta0, tab->theta1, tab->sum_sqr_diff);
 		 	printf("cost :  %Lf | sum_cost : %Lf  | diff_cost :  %Lf | sum_diff_price_tr : %Lf  | sum_prod_price_tr : %Lf\n", tab->cost, tab->sum_cost, tab->diff_cost, tab->sum_diff_price_tr, tab->sum_prod_price_tr);
 		}
-	} while ((((-tab->tempt0) > 0.00000001) && ((-tab->tempt1) > 0.00000001)) ||(((- tab->tempt0) > 0.000000001) && ((tab->tempt1) > 0.000000001)));
+	} while (((ABS(tab->tempt0) > 0.00000001) && (ABS(tab->tempt1) > 0.00000001)));
+	//} while ((((-tab->tempt0) > 0.00000001) && ((-tab->tempt1) > 0.00000001)) ||(((- tab->tempt0) > 0.000000001) && ((tab->tempt1) > 0.000000001)));
 	//} while (tab->num_iterations <= 20);
 
 	FILE    *fichier = NULL;
@@ -102,7 +113,7 @@ int main(void)
 	if (fichier != NULL)
 	{
 		printf("Estimation machine learning (méthode gradient descendant) : \nAvant entrainement : theta0 initial = 0  et theta1 initial  =  0 \n");
-		printf("Après %d iterations,  theta0 final =  %Lf   et theta1 final =  %Lf \n" , tab->num_iterations, (tab->theta0 * 10000), tab->theta1);
+		printf("Après %d iterations,  theta0 final =  %.2Lf   et theta1 final =  %.5Lf \n" , tab->num_iterations, (tab->theta0 * 10000), tab->theta1);
 		fprintf(fichier,"\n \n Estimation Machine Learning (méthode du gradient descendant) :\n");
 		fprintf(fichier, "Avant entrainement : theta0 initial = 0  et theta1 initial  =  0 \n");
 		fprintf(fichier, "Après %d iterations,  theta0 final =  %.2Lf  et theta1 final =  %.5Lf \n" , tab->num_iterations, (tab->theta0 * 10000), tab->theta1);
