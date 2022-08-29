@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/29 15:57:11 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:32:14 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,4 +298,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	return (str);
 	free(str);
+}
+
+int	ft_freesplit(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		free(strs[i]);
+		strs[i] = NULL;
+		i++;;
+	}
+	free(strs);
+	strs = NULL;
+	return (0);
 }

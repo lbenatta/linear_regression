@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/29 11:28:02 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:21:36 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct t_tab
 }	t_tab;
 
 int		ft_atoi(const char *str);
+int		ft_freesplit(char **strs);
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);

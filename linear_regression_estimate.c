@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/29 16:39:22 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:33:09 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(void)
 		tab->price[i] = ft_atoi(strs[1]);
 			i++;
 		free(str);
-		free(strs);
+		ft_freesplit(strs);
 		str = get_next_line(f);
 	}
 	free(str);
