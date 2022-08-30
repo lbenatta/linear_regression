@@ -48,11 +48,10 @@ int main(void)
 		tab->price[i] = ft_atoi(strs[1]);
 			i++;
 		free(str);
-		free(strs);
+		ft_freesplit(strs);
 		str = get_next_line(f);
 	}
 	free(str);
-	free(strs);
 	/*
 	printf("km : %Lf\n", tab->km[0]);
 	printf("km : %Lf\n", tab->km[1]);
@@ -66,7 +65,7 @@ int main(void)
 	do
 	{
 		tab->sum_price_tr = 0;
-		tab->sum_diff_price_tr = 0; // erreur
+		tab->sum_diff_price_tr = 0;
 		tab->sum_sqr_diff = 0;
 		tab->sum_prod_price_tr = 0;
 		tab->cost = 0.0;
@@ -101,10 +100,9 @@ int main(void)
 		 	tab->theta1 = tab->theta1 - tab->tempt1;
 		 	tab->num_iterations++;
 		 	printf("iterations: %d  | tempt0 : %Lf    | tempt1 : %Lf  | theta0 : %Lf    | theta1 : %Lf  |  sum_sqr_diff : %LF | " , tab->num_iterations, tab->tempt0, tab->tempt1, tab->theta0, tab->theta1, tab->sum_sqr_diff);
-		 	printf("cost :  %Lf | sum_cost : %Lf  | diff_cost :  %Lf | sum_diff_price_tr : %Lf  | sum_prod_price_tr : %Lf\n", tab->cost, tab->sum_cost, tab->diff_cost, tab->sum_diff_price_tr, tab->sum_prod_price_tr);
+		 	//printf("cost :  %Lf | sum_cost : %Lf  | diff_cost :  %Lf | sum_diff_price_tr : %Lf  | sum_prod_price_tr : %Lf\n", tab->cost, tab->sum_cost, tab->diff_cost, tab->sum_diff_price_tr, tab->sum_prod_price_tr);
 		}
 	} while (((ABS(tab->tempt0) > 0.00000001) && (ABS(tab->tempt1) > 0.00000001)));
-	//} while ((((-tab->tempt0) > 0.00000001) && ((-tab->tempt1) > 0.00000001)) ||(((- tab->tempt0) > 0.000000001) && ((tab->tempt1) > 0.000000001)));
 	//} while (tab->num_iterations <= 20);
 
 	FILE    *fichier = NULL;
@@ -120,7 +118,7 @@ int main(void)
 		fclose(fichier);
 	}
 	FILE    *fichier_ = NULL;
-	fichier_ = fopen("theta.csv", "a+");
+	fichier_ = fopen("theta.txt", "a+");
 	if (fichier_ != NULL)
 	{
 	 	fprintf(fichier_, "%.2LF, %.5Lf\n", (tab->theta0 * 10000), tab->theta1);

@@ -16,8 +16,6 @@
 /*
 void test(t_tab *tab)
 {
-	//printf("k : %f\n", tab->k[]);
-	//printf("p : %f\n", tab->p[]);
 	printf("TOTAL_X_km : %d\n", tab->sum_km);
 	printf("TOTAL_Y_price : %d\n", tab->sum_price);
 	printf("TOTAL_X2_sqr_km : %ld\n", tab->sum_sqr_km);
@@ -64,19 +62,7 @@ int	main(void)
 	i = 0;
 	tab->theta0 = 0;
 	tab->theta1 = 0;
-	// tab->sum_price = 0;
-	// tab->mean_price = 0;
-	// tab->sum_km = 0;
-	// tab->mean_km = 0;
-	// tab->sum_sqr_price = 0;
-	// tab->sum_sqr_km = 0;
-	// tab->sum_cov = 0;
-	// tab->sum_cov = 0;
-	// tab->sum_var_km = 0;
-	// tab->sum_var_price = 0;
-	// tab->r = 0;
-	// tab->km_max = 0;
-
+	
 	for (i = 0; i < tab->count; i++)
 	{
 		tab->sum_km = tab->sum_km + tab->km[i];
@@ -138,7 +124,6 @@ int	main(void)
 	scanf("%d", &nombre);
 	{
 		if ((nombre >= tab->km_max) || (nombre <= 0) || (isdigit(nombre) != 0))
-		//if (nombre >= 396245)
 			printf("Le prix ne peut être estimé.\n");
 		else
 		{

@@ -20,23 +20,20 @@ int	main(void)
 	int					i;
 	long double			theta0 = 0;
 	long double			theta1 = 0;
-	int					nombre = 0;
+	long double			nombre = 0;
 	long double			resultat = 0;
-	long double			km_max = 0;
+	
 	t_tab	*tab;
 
-	printf(" Le prix ne peut être estimé pour un kilométrage > 396 245.\n Entrez le nombre de km (< 396 245):");
-	scanf("%d", &nombre);
+	printf(" Le prix ne peut être estimé pour un kilométrage >= 396271\n"); 
+	printf(" Entrez le nombre de km (< 396271):\n"); 
+	scanf("%Lf", &nombre);
 
-	km_max = -(theta0) / theta1;
-	//printf("km_max: %.0Lf\n", km_max);
-
-	if ((nombre >= km_max) || (nombre <= 0) || (isdigit(nombre) != 0))
-	//if (nombre >= 396245)
+	if ((nombre >= 396271) || (nombre <= 0) || (isdigit(nombre) != 0))
 		printf("Le prix ne peut être estimé.\n");
 	else
 	{
-		f = open("theta.csv", O_RDONLY);
+		f = open("theta.txt", O_RDONLY);
 		if (f == 0)
 		{
 			printf("Le fichier n'existe pas\n");
@@ -52,7 +49,6 @@ int	main(void)
 				return(1);
 			}
 			str = get_next_line(f);
-			//printf("s === %s\n", str);
 			free(str);
 			str = get_next_line(f);
 			if (str == NULL)
@@ -63,7 +59,7 @@ int	main(void)
 				printf(" Le prix estimé est %.2Lf Euros.\n", resultat);
 				free(tab);
 				close(f);
-				return (0);
+				return (1);
 			}
 			else
 			{
@@ -72,14 +68,12 @@ int	main(void)
 				theta1 = atof(strs[1]);
 					i++;
 				free(str);
-				free(strs);
+				ft_freesplit(strs);
 				str = get_next_line(f);
 				resultat = (theta0 + (theta1 * nombre));
 				printf(" Le prix estimé est %.2Lf Euros.\n", resultat);
 				//printf("%.2Lf\n", theta0);
 				//printf("%.5Lf\n", theta1);
-				//km_max = -(theta0) / theta1;
-				//printf("km_max: %.0Lf\n", km_max);
 				free(tab);
 				free(str);
 				close(f);
