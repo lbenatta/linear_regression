@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/29 16:12:12 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:07:14 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,54 @@
 int	main(void)
 {
 	int					f;
+	char				input[7];
 	char				*str;
 	char				**strs;
 	int					i;
 	long double			theta0 = 0;
 	long double			theta1 = 0;
-	long double			nombre = 0;
+	int					nombre = 0;
+	//long double			nombre = 0;
 	long double			resultat = 0;
-	
+
 	t_tab	*tab;
 
-	printf(" Le prix ne peut être estimé pour un kilométrage >= 396271\n"); 
-	printf(" Entrez le nombre de km (< 396271):\n"); 
-	scanf("%Lf", &nombre);
-
-	if ((nombre >= 396271) || (nombre <= 0) || (isdigit(nombre) != 0))
+	printf(" Le prix ne peut être estimé pour un kilométrage >= 396271\n");
+	printf(" Entrez le nombre de km (< 396271):\n");
+	//scanf("%d", &nombre);
+	scanf("%s", input);
+	printf("input : %s\n", input);
+	if (!isdigit(input[0]))
+	{
 		printf("Le prix ne peut être estimé.\n");
+		free(tab);
+		return (1);
+	}
+	else
+		nombre = ft_atoi(input);
+	if ((nombre >= 396271) || (nombre < 0))
+	{
+		printf("Le prix ne peut être estimé.\n");
+		return (1);
+	}
 	else
 	{
 		f = open("theta.txt", O_RDONLY);
 		if (f == 0)
 		{
 			printf("Le fichier n'existe pas\n");
-			return(0);
+			return(1);
 		}
 		else
 		{
 			i = 0;
 			tab = (t_tab *)malloc(sizeof(t_tab));
-			if (tab == NULL)
+			memset(tab, 0, sizeof(t_tab));
+			if (!tab)
 			{
 				printf("Échec de l'allocation\n");
-				return(1);
+				close(f);
+			 	return(1);
 			}
 			str = get_next_line(f);
 			free(str);
@@ -57,9 +73,11 @@ int	main(void)
 				theta1 = 0;
 				resultat = (theta0 + (theta1 * nombre));
 				printf(" Le prix estimé est %.2Lf Euros.\n", resultat);
-				free(tab);
+				//free(tab);
+				//ft_freesplit(strs);
+				//free(str);
 				close(f);
-				return (1);
+				return (0);
 			}
 			else
 			{
@@ -72,16 +90,14 @@ int	main(void)
 				str = get_next_line(f);
 				resultat = (theta0 + (theta1 * nombre));
 				printf(" Le prix estimé est %.2Lf Euros.\n", resultat);
-				//printf("%.2Lf\n", theta0);
-				//printf("%.5Lf\n", theta1);
-				free(tab);
+				printf("theta0 = %.2Lf\n", theta0);
+				printf("theta1 = %.5Lf\n", theta1);
+				ft_freesplit(strs);
 				free(str);
+				free(tab);
 				close(f);
 				return (0);
 			}
-			free(tab);
-			free(str);
-			return (0);
 		}
 	}
 

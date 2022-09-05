@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/08/29 17:32:14 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:54:38 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
 	str = (char *)malloc(sizeof(char) * size);
 	if (!str)
@@ -303,8 +302,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 int	ft_freesplit(char **strs)
 {
 	int	i;
-
 	i = 0;
+
 	while (strs[i])
 	{
 		free(strs[i]);
