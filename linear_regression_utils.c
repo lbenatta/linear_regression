@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/05 11:54:38 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:58:04 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,13 +304,14 @@ int	ft_freesplit(char **strs)
 	int	i;
 	i = 0;
 
-	while (strs[i])
+	while (strs[i] != NULL)
 	{
 		free(strs[i]);
 		strs[i] = NULL;
-		i++;;
+		i++;
 	}
-	free(strs);
+	if (strs)
+		free(strs);
 	strs = NULL;
 	return (0);
 }
