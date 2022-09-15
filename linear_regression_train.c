@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/10 18:29:11 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:44:36 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,7 @@ int main(void)
 		str = get_next_line(f);
 	}
 	free(str);
-	/*
-	printf("km : %Lf\n", tab->km[0]);
-	printf("km : %Lf\n", tab->km[1]);
-	printf("price : %Lf\n", tab->price[0]);
-	printf("price : %Lf\n", tab->price[1]);
-	*/
+	
 	int	j = 0;
 	tab->learning_rate = 0.01;
 	tab->count = i;
