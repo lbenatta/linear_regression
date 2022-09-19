@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/15 15:43:15 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:18:15 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,12 @@ int	main(void)
 				free(str);
 				free(tab);
 				close(f);
+				f = open("theta.csv", O_WRONLY | O_TRUNC);
+				close(f);
 				return (0);
 			}
 			free(str);
 			ft_freesplit(strs);
 		}
 	}
-
 }

@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/15 15:44:36 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:13:50 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int main(void)
 		str = get_next_line(f);
 	}
 	free(str);
-	
+
 	int	j = 0;
 	tab->learning_rate = 0.01;
 	tab->count = i;
@@ -108,7 +108,7 @@ int main(void)
 		printf("Estimation machine learning (méthode gradient descendant) : \nAvant entrainement : theta0 initial = 0  et theta1 initial  =  0 \n");
 		printf("Après %d iterations : theta0 final =  %.2Lf   et theta1 final =  %.5Lf \n" , tab->num_iterations, (tab->theta0 * 10000), tab->theta1);
 		fprintf(fichier,"\n \n Estimation Machine Learning (méthode du gradient descendant) :\n");
-		fprintf(fichier, "Avant entrainement : theta0 initial = 0  et theta1 initial  =  0 \n");
+		fprintf(fichier, "Avant entrainement : theta0 initial = 0  et theta1 initial  = 0 \n");
 		fprintf(fichier, "Après %d iterations : theta0 final =  %.2Lf  et theta1 final =  %.5Lf \n" , tab->num_iterations, (tab->theta0 * 10000), tab->theta1);
 		fclose(fichier);
 	}
