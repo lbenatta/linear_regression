@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/19 14:51:48 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:10:04 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void test(t_tab *tab)
 int	main(void)
 {
 	int		f;
-	char	input[7];
 	char	*str;
 	char	**strs;
 	int		i;
@@ -123,16 +122,13 @@ int	main(void)
 
 	printf(" Le prix ne peut être estimé pour un kilométrage > %.0Lf.\n", tab->km_max);
 	printf(" Entrez le nombre de km (< %.0Lf):", tab->km_max);
-	scanf("%s", input);
-	if (!isdigit(input[0]))
+	if (scanf("%d", &nombre) == 0)
 	{
 		printf("Le prix ne peut être estimé.\n");
 		free(tab);
-		return (1);
+		return (0);
 	}
-	else
-		nombre = ft_atoi(input);
-	if ((nombre >= tab->km_max) || (nombre < 0) || (isdigit(nombre) != 0))
+	if ((nombre >= tab->km_max) || (nombre < 0))
 		printf(" Le prix ne peut être estimé.\n");
 	else
 	{

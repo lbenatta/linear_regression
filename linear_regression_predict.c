@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/19 15:18:15 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:22:50 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,29 @@
 
 int	main(void)
 {
-	int					f;
-	char				input[7];
-	char				*str;
-	char				**strs;
-	int					i;
-	long double			theta0 = 0;
-	long double			theta1 = 0;
-	long double			nombre = 0;
-	long double			resultat = 0;
+	int				f;
+	char			*str;
+	char			**strs;
+	int				i;
+	long double		theta0 = 0;
+	long double		theta1 = 0;
+	long double		nombre = 0;
+	long double		resultat = 0;
 
 	t_tab	*tab;
 
 	printf(" Le prix ne peut être estimé pour un kilométrage >= 396271\n");
 	printf(" Entrez le nombre de km (< 396271): ");
-	scanf("%s", input);
-	if (!isdigit(input[0]))
+	if (scanf("%Le", &nombre) == 0)
 	{
 		printf("Le prix ne peut être estimé.\n");
-		return (1);
+		//free(tab);
+		return (0);
 	}
-	else
-		nombre = ft_atoi(input);
 	if ((nombre >= 396271) || (nombre < 0))
 	{
 		printf("Le prix ne peut être estimé.\n");
-		return (1);
+		return (0);
 	}
 	else
 	{
@@ -47,7 +44,7 @@ int	main(void)
 		if (f == 0)
 		{
 			printf("Le fichier n'existe pas\n");
-			return (1);
+			return (0);
 		}
 		else
 		{
