@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/19 16:22:50 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:55:31 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(void)
 	}
 	else
 	{
+		//f = open("theta.txt", O_RDONLY, O_TRUNC);
 		f = open("theta.csv", O_RDONLY, O_TRUNC);
 		if (f == 0)
 		{
@@ -55,7 +56,7 @@ int	main(void)
 			{
 				printf("Échec de l'allocation\n");
 				close(f);
-			 	return (1);
+			 	return (0);
 			}
 			str = get_next_line(f);
 			free(str);
@@ -83,11 +84,13 @@ int	main(void)
 				str = get_next_line(f);
 				resultat = (theta0 + (theta1 * nombre));
 				printf(" Le prix estimé est %.2Lf Euros.\n", resultat);
-				//printf("theta0 = %.2Lf\n", theta0);
-				//printf("theta1 = %.5Lf\n", theta1);
+				printf("theta0 = %.2Lf\n", theta0);
+				printf("theta1 = %.5Lf\n", theta1);
 				free(str);
 				free(tab);
 				close(f);
+				//f = open("theta.txt", O_WRONLY | O_TRUNC);
+				//close(f);
 				f = open("theta.csv", O_WRONLY | O_TRUNC);
 				close(f);
 				return (0);
