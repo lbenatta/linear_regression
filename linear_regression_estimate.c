@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/19 16:10:04 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:52:14 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,9 @@ int	main(void)
 	fichier = fopen("res.txt", "w");
 	if (fichier != NULL)
 	{
-		fprintf(fichier, "\n Estimation mathématique 'classique'(méthode des moindres carrés) :\n theta0 = %.2Lf  et theta1 = %.5Lf\n", tab->theta0 , tab->theta1);
-		fprintf(fichier, "  correlation r = %.4Lg\n", tab->r);
-		fprintf(fichier, "  accuracy MAE = %.4Lg\n", tab->accur);
+		fprintf(fichier, " Estimation mathématique 'classique'(méthode des moindres carrés) :\n theta0 = %.2Lf  et theta1 = %.5Lf\n", tab->theta0 , tab->theta1);
+		fprintf(fichier, " correlation r = %.4Lg\n", tab->r);
+		fprintf(fichier, " accuracy MAE = %.4Lg\n", tab->accur);
 		fclose(fichier);
 	}
 	free (tab);
