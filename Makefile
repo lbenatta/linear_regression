@@ -23,8 +23,9 @@ SRC	= linear_regression_utils.c \
 	linear_regression_predict.c \
 	linear_regression_train.c
 
-OBJ = $(SRC:.c=.o)
-CFLAGS = -g -Wall -Wextra -Werror -lm
+OBJS = $(SRC:.c=.o)
+
+INCLUDE = common.h
 
 RM = rm -rf
 
@@ -43,14 +44,14 @@ train: linear_regression_train.c
 	@$(CC) $(CFLAGS) common.h linear_regression_utils.c linear_regression_train.c $(LDFLAGS)
 	@./a.out
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.c
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJS)
 	rm -rf *.o
 	rm -rf $(OBJS)
 
@@ -61,5 +62,7 @@ leaks: $(NAME)
 	valgrind ./lr --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 re: fclean all
+
+.PHONY: all clean fclean re
 
 .PHONY: all clean fclean re
