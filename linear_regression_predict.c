@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/25 15:55:31 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/10/23 15:57:00 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,25 @@ int	main(void)
 
 	printf(" Le prix ne peut être estimé pour un kilométrage >= 396271\n");
 	printf(" Entrez le nombre de km (< 396271): ");
-	if (scanf("%Le", &nombre) == 0)
+	if (scanf("%Le", &nombre) <= 0)
 	{
 		printf("Le prix ne peut être estimé.\n");
-		//free(tab);
+		unlink("theta.csv");
 		return (0);
 	}
 	if ((nombre >= 396271) || (nombre < 0))
 	{
 		printf("Le prix ne peut être estimé.\n");
+		unlink("theta.csv");
 		return (0);
 	}
 	else
 	{
-		//f = open("theta.txt", O_RDONLY, O_TRUNC);
 		f = open("theta.csv", O_RDONLY, O_TRUNC);
 		if (f == 0)
 		{
 			printf("Le fichier n'existe pas\n");
+			unlink("theta.csv");
 			return (0);
 		}
 		else
@@ -56,10 +57,9 @@ int	main(void)
 			{
 				printf("Échec de l'allocation\n");
 				close(f);
+				unlink("theta.csv");
 			 	return (0);
 			}
-			str = get_next_line(f);
-			free(str);
 			str = get_next_line(f);
 			if (str == NULL)
 			{
@@ -69,6 +69,7 @@ int	main(void)
 				printf(" Le prix estimé est %.2Lf Euros.\n", resultat);
 				free(tab);
 				close(f);
+				unlink("theta.csv");
 				return (0);
 			}
 			else
@@ -89,14 +90,14 @@ int	main(void)
 				free(str);
 				free(tab);
 				close(f);
-				//f = open("theta.txt", O_WRONLY | O_TRUNC);
-				//close(f);
 				f = open("theta.csv", O_WRONLY | O_TRUNC);
 				close(f);
+				unlink("theta.csv");
 				return (0);
 			}
 			free(str);
 			ft_freesplit(strs);
+			unlink("theta.csv");
 		}
 	}
 }

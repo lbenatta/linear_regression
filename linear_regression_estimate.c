@@ -6,24 +6,13 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/29 13:52:14 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/10/23 15:58:57 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
 #define NUM_DATA 24
-/*
-void test(t_tab *tab)
-{
-	printf("TOTAL_X_km : %d\n", tab->sum_km);
-	printf("TOTAL_Y_price : %d\n", tab->sum_price);
-	printf("TOTAL_X2_sqr_km : %ld\n", tab->sum_sqr_km);
-	printf("TOTAL_Y2_sqr_price : %ld\n", tab->sum_sqr_price);
-	printf("TOTAL_XY_prod : %ld\n", tab->sum_pdt);
-	printf("theta1 = %f\n", tab->theta1);
-	printf("theta0 = %f\n", tab->theta0);
-} */
 
 int	main(void)
 {
@@ -100,29 +89,17 @@ int	main(void)
 		tab->accur = 100 - (100 * ABS((((long double)tab->sum_delta_price / (long double)tab->sum_price)) / NUM_DATA)) ;
 
 	}
-	//printf("sum_km : %Lf\n", tab->sum_km);
-	//printf("sum_price : %Lf\n", tab->sum_price);
-	//printf("mean_km : %Lf\n", tab->mean_km);
-	//printf("mean_price : %Lf\n", tab->mean_price);
-	//printf("sum_sqr_km : %Lf\n", tab->sum_sqr_km);
-	//printf("sum_sqr_price : %Lf\n", tab->sum_sqr_price);
-	//printf("sum_pdt : %Lf\n", tab->sum_pdt);
 	printf(" Estimation mathématique (méthode des moindres carrés) : \n theta0 = %.2Lf   | theta1 = %.5Lf\n", tab->theta0 , tab->theta1);
-	//printf("means:%Lf / %Lf\n", tab->mean_km, tab->mean_price);
-	//printf("diffs:%Lf / %Lf\n", tab->diff_km[i], tab->diff_price[i]);
-	//printf("sum_var_km = %Lf\n", tab->sum_var_km);
-	//printf("sum_var_price = %Lf\n", tab->sum_var_price);
-	//printf("sum_cov = %Lf\n", tab->sum_cov);
-	//printf("sum_delta_price : %Lf\n", tab->sum_delta_price);
 	printf(" correlation r = %.4Lg\n", tab->r);
 	printf(" accuracy MAE = %.4Lg\n", tab->accur);
-	//printf(" km_max = %.0Lf\n", tab->km_max);
+	
 	int			nombre = 0;
 	long double	resultat = 0;
 
 	printf(" Le prix ne peut être estimé pour un kilométrage > %.0Lf.\n", tab->km_max);
 	printf(" Entrez le nombre de km (< %.0Lf):", tab->km_max);
-	if (scanf("%d", &nombre) == 0)
+	scanf("%d", &nombre);
+	if (nombre == 0)
 	{
 		printf("Le prix ne peut être estimé.\n");
 		free(tab);

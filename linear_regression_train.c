@@ -6,7 +6,7 @@
 /*   By: lbenatta <lbenatta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:17:45 by lbenatta          #+#    #+#             */
-/*   Updated: 2022/09/25 15:54:55 by lbenatta         ###   ########.fr       */
+/*   Updated: 2022/10/23 15:11:30 by lbenatta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int main(void)
 		fclose(fichier);
 	}
 	FILE	*fichier_ = NULL;
-	//fichier_ = fopen("theta.txt", "a+");
 	fichier_ = fopen("theta.csv", "a+");
 	if (fichier_ != NULL)
 	{
